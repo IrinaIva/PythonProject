@@ -26,5 +26,10 @@ class ProductPage(BasePage):
         WebDriverWait(self.browser, 10).until(
             EC.visibility_of_element_located(ItemPageLocators.BASKET_TOTAL))
         product_price = self.browser.find_element(*ItemPageLocators.BASKET_TOTAL).text
-        assert price == product_price, "Wrong product was added"
+        assert price == product_price, "Wrong product price of the added product"
 
+    def assert_open_item(self, title, price):
+        product_title = self.browser.find_element(*ItemPageLocators.PRODUCT_TITLE).text
+        product_price = self.browser.find_element(*ItemPageLocators.PRODUCT_PRICE).text
+        assert price == product_price, "Wrong product price after adding"
+        assert title == product_title, "Wrong product title after adding"
