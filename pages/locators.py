@@ -10,6 +10,11 @@ class LoginPageLocators():
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
     REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
 
+
 class ItemPageLocators():
     ADD_ITEM_BUTTON = (By.CSS_SELECTOR, "#add_to_basket_form button")
+    PRODUCT_TITLE = (By.XPATH, "//div[@class='col-sm-6 product_main']/h1")
+    PRODUCT_PRICE = (By.XPATH, "//div[@class='col-sm-6 product_main']/p")
+    PRODUCT_ADDED_MESSAGE = (By.XPATH, "//div[@id='messages']//div[1]//strong")
+    BASKET_TOTAL = (By.XPATH, "//div[@id='messages']//div[3]//strong")
 
