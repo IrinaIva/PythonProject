@@ -20,16 +20,24 @@ class ProductPage(BasePage):
         WebDriverWait(self.browser, 10).until(
             EC.visibility_of_element_located(ItemPageLocators.PRODUCT_ADDED_MESSAGE))
         product_name = self.browser.find_element(*ItemPageLocators.PRODUCT_ADDED_MESSAGE).text
-        assert title == product_name, "Wrong product was added"
+        assert title == product_name, f"Wrong product was added, expected: {title}, but was: {product_name}"
 
     def assert_item_price_added_to_the_basket_message(self, price):
         WebDriverWait(self.browser, 10).until(
             EC.visibility_of_element_located(ItemPageLocators.BASKET_TOTAL))
         product_price = self.browser.find_element(*ItemPageLocators.BASKET_TOTAL).text
-        assert price == product_price, "Wrong product price of the added product"
+        assert price == product_price, f"Wrong product price of the added product, expected: {price}, but was: {product_price} "
 
     def assert_open_item(self, title, price):
         product_title = self.browser.find_element(*ItemPageLocators.PRODUCT_TITLE).text
         product_price = self.browser.find_element(*ItemPageLocators.PRODUCT_PRICE).text
-        assert price == product_price, "Wrong product price after adding"
-        assert title == product_title, "Wrong product title after adding"
+        assert price == product_price, f"Wrong product price after adding, expected: {price}, but was: {product_price}"
+        assert title == product_title, f"Wrong product title after adding, expected: {title}, but was: {product_title}"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ItemPageLocators.PRODUCT_ADDED_MESSAGE), \
+       "Success message is presented, but should not be"
+
+    def should_not_be_success_message_disappeared(self):
+        assert self.is_disappeared(*ItemPageLocators.PRODUCT_ADDED_MESSAGE), \
+       "Success message is presented, but should not be"
