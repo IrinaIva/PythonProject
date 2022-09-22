@@ -8,9 +8,15 @@ class LoginPage(BasePage):
         self.should_be_login_form()
         self.should_be_register_form()
 
+    def register_new_user(self, browser, email, password):
+        enter_text = BasePage.enter_text
+        enter_text(self, browser,  *LoginPageLocators.REGISTER_EMAIL, email)
+        enter_text(self, browser,  *LoginPageLocators.REGISTER_PASSWORD, password)
+        enter_text(self, browser,  *LoginPageLocators.REGISTER_CONFIRM_PASSWORD, password)
+        BasePage.click(self, browser,  *LoginPageLocators.REGISTER_BUTTON)
+
     def should_be_login_url(self):
         assert "login" in self.browser.current_url, "This is not login url"
-
 
     def should_be_login_form(self):
         assert self.is_element_present(*LoginPageLocators.LOGIN_FORM), "Login form is not presented"

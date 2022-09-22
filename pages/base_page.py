@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from .locators import BasePageLocators
 
 
-class BasePage():
+class BasePage:
 
     def __init__(self, browser, url):
         self.browser = browser
@@ -28,6 +28,15 @@ class BasePage():
 
     def open(self):
         self.browser.get(self.url)
+
+    def enter_text(self, browser, how, what, text):
+        field = browser.find_element(how, what)
+        field.click()
+        field.clear()
+        field.send_keys(text)
+
+    def click(self, browser, how, what):
+        browser.find_element(how, what).click()
 
     def is_element_present(self, how, what):
         try:
@@ -66,3 +75,7 @@ class BasePage():
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
