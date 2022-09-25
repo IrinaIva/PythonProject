@@ -29,14 +29,14 @@ class BasePage:
     def open(self):
         self.browser.get(self.url)
 
-    def enter_text(self, browser, how, what, text):
-        field = browser.find_element(how, what)
+    def enter_text(self, how, what, text: str):
+        field = self.browser.find_element(how, what)
         field.click()
         field.clear()
         field.send_keys(text)
 
-    def click(self, browser, how, what):
-        browser.find_element(how, what).click()
+    def click(self, how: str, what: str):
+        self.browser.find_element(how, what).click()
 
     def is_element_present(self, how, what):
         try:
